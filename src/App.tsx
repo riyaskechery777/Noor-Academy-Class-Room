@@ -13,6 +13,7 @@ import CoursesPage from './pages/CoursesPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import AuthCallback from './pages/AuthCallback';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -67,6 +68,7 @@ export default function App() {
             <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
 
             {/* Admin Routes */}
             <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><AdminDashboard /></ProtectedRoute>} />
