@@ -65,7 +65,7 @@ const courses = [
     students: 450,
     rating: 4.9,
     duration: '40 hrs',
-    image: 'https://images.pexels.com/photos/1340185/pexels-photo-1340185.jpeg?auto=compress&cs=tinysrgb&w=500',
+    image: 'https://images.pexels.com/photos/2893370/pexels-photo-2893370.jpeg?auto=compress&cs=tinysrgb&w=500',
     category: 'Quran',
     isFree: false,
     price: 49,
@@ -77,7 +77,7 @@ const courses = [
     students: 380,
     rating: 4.8,
     duration: '30 hrs',
-    image: 'https://images.pexels.com/photos/3771074/pexels-photo-3771074.jpeg?auto=compress&cs=tinysrgb&w=500',
+    image: 'https://images.pexels.com/photos/3905830/pexels-photo-3905830.jpeg?auto=compress&cs=tinysrgb&w=500',
     category: 'Islamic Studies',
     isFree: true,
     price: 0,
@@ -89,7 +89,7 @@ const courses = [
     students: 290,
     rating: 4.7,
     duration: '50 hrs',
-    image: 'https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg?auto=compress&cs=tinysrgb&w=500',
+    image: 'https://images.pexels.com/photos/3755761/pexels-photo-3755761.jpeg?auto=compress&cs=tinysrgb&w=500',
     category: 'Language',
     isFree: false,
     price: 39,
@@ -101,7 +101,7 @@ const testimonials = [
   {
     name: 'Aisha Rahman',
     role: 'Student',
-    avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+    avatar: 'https://images.pexels.com/photos/3905830/pexels-photo-3905830.jpeg?auto=compress&cs=tinysrgb&w=100',
     text: 'Hiraa has completely transformed my Islamic education journey. The teachers are incredibly knowledgeable and the platform is beautifully designed.',
     rating: 5,
     course: 'Quran & Tajweed',
@@ -109,7 +109,7 @@ const testimonials = [
   {
     name: 'Omar Abdullah',
     role: 'Parent',
-    avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=100',
+    avatar: 'https://images.pexels.com/photos/3771044/pexels-photo-3771044.jpeg?auto=compress&cs=tinysrgb&w=100',
     text: 'My children love learning here. The combination of modern technology with authentic Islamic values is exactly what we were looking for.',
     rating: 5,
     course: 'Islamic Studies',
@@ -117,7 +117,7 @@ const testimonials = [
   {
     name: 'Fatima Al-Sayed',
     role: 'Teacher',
-    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+    avatar: 'https://images.pexels.com/photos/2869215/pexels-photo-2869215.jpeg?auto=compress&cs=tinysrgb&w=100',
     text: 'As an educator, the platform gives me all the tools I need to deliver world-class Islamic education effectively and meaningfully.',
     rating: 5,
     course: 'Arabic Language',
@@ -234,10 +234,10 @@ export default function HomePage() {
               <div className="flex items-center gap-5">
                 <div className="flex -space-x-2.5">
                   {[
-                    'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=60',
-                    'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=60',
-                    'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=60',
-                    'https://images.pexels.com/photos/1181391/pexels-photo-1181391.jpeg?auto=compress&cs=tinysrgb&w=60',
+                    'https://images.pexels.com/photos/3755761/pexels-photo-3755761.jpeg?auto=compress&cs=tinysrgb&w=60',
+                    'https://images.pexels.com/photos/3771044/pexels-photo-3771044.jpeg?auto=compress&cs=tinysrgb&w=60',
+                    'https://images.pexels.com/photos/3905830/pexels-photo-3905830.jpeg?auto=compress&cs=tinysrgb&w=60',
+                    'https://images.pexels.com/photos/2869215/pexels-photo-2869215.jpeg?auto=compress&cs=tinysrgb&w=60',
                   ].map((src, i) => (
                     <img
                       key={i}
@@ -262,7 +262,7 @@ export default function HomePage() {
               {/* Main image */}
               <div className="relative rounded-3xl overflow-hidden shadow-float">
                 <img
-                  src="https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg?auto=compress&cs=tinysrgb&w=700"
+                  src="https://images.pexels.com/photos/2869215/pexels-photo-2869215.jpeg?auto=compress&cs=tinysrgb&w=700"
                   alt="Students learning at Hiraa School"
                   className="w-full h-[520px] object-cover"
                 />
