@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
+function getRoleRedirect(role: string): string {
+  if (role === 'admin') return '/admin';
+  if (role === 'teacher') return '/teacher';
+  return '/student';
+}
+
 export default function AuthCallback() {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [message, setMessage] = useState('');
@@ -23,27 +29,34 @@ export default function AuthCallback() {
         const metadata = user.user_metadata;
         const fullName = metadata?.full_name || metadata?.name || '';
         const email = user.email || '';
+        const avatarUrl = metadata?.avatar_url || metadata?.picture || '';
 
-        // Check if profile exists
+        // Check if profile already exists
         const { data: existingProfile } = await supabase
           .from('profiles')
-          .select('id')
+          .select('id, role')
           .eq('id', user.id)
           .maybeSingle();
 
+        let role = 'student';
+
         if (!existingProfile) {
-          // Get role from localStorage (set during signup) or default to student
+          // New user — get role from localStorage (set during signup flow) or default student
           const storedRole = localStorage.getItem('hiraa-google-role') || 'student';
           localStorage.removeItem('hiraa-google-role');
+
+          // Admin email always gets admin role
+          const assignedRole = email === 'riyaskechery777@gmail.com' ? 'admin' : storedRole;
 
           const { error: profileError } = await supabase.from('profiles').insert({
             id: user.id,
             email,
             full_name: fullName,
-            role: storedRole,
-            avatar_url: metadata?.avatar_url || metadata?.picture || '',
-            approved: storedRole === 'student',
-            status: storedRole === 'teacher' ? 'pending' : 'active',
+            role: assignedRole,
+            avatar_url: avatarUrl,
+            phone: assignedRole === 'admin' ? '+99 9961814096' : '',
+            approved: assignedRole === 'student' || assignedRole === 'admin',
+            status: assignedRole === 'teacher' ? 'pending' : 'active',
           });
 
           if (profileError) {
@@ -52,15 +65,28 @@ export default function AuthCallback() {
             setMessage('Failed to create profile. Please contact support.');
             return;
           }
+
+          role = assignedRole;
+        } else {
+          // Existing user — update avatar in case it changed, force admin if email matches
+          role = existingProfile.role;
+          const updates: Record<string, unknown> = { avatar_url: avatarUrl, updated_at: new Date().toISOString() };
+          if (email === 'riyaskechery777@gmail.com') {
+            updates.role = 'admin';
+            updates.status = 'active';
+            updates.approved = true;
+            updates.phone = '+99 9961814096';
+            role = 'admin';
+          }
+          await supabase.from('profiles').update(updates).eq('id', user.id);
         }
 
         setStatus('success');
-        setMessage('Successfully signed in!');
+        setMessage('Welcome! Redirecting to your dashboard…');
 
-        // Redirect based on role
         setTimeout(() => {
-          navigate('/');
-        }, 1500);
+          navigate(getRoleRedirect(role), { replace: true });
+        }, 1200);
       } catch (err) {
         console.error('Auth callback error:', err);
         setStatus('error');
@@ -80,7 +106,7 @@ export default function AuthCallback() {
               <Loader2 className="w-10 h-10 text-emerald-600 dark:text-emerald-400 animate-spin" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-              Completing Sign In...
+              Completing Sign In…
             </h2>
             <p className="text-gray-500 dark:text-gray-400">
               Please wait while we set up your account.
